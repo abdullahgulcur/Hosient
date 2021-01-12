@@ -74,5 +74,19 @@ namespace Hosient
             FillInmateWithDoctors();
         }
 
+        protected void ButtonHospitalizePatient_Click(object sender, EventArgs e)
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("HOSPITALIZE_PATIENT", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@patientID", SqlDbType.BigInt).Value = txtPatientID.Text.Trim();
+            sqlCmd.Parameters.AddWithValue("@roomNumber", SqlDbType.SmallInt).Value = txtRoomNumber.Text.Trim();
+
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+            FillInmateWithDoctors();
+        }
     }
 }

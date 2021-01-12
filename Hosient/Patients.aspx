@@ -134,6 +134,36 @@
             </tr>
         </table>
 
+    <h3> Hospitalize Patient </h3>
+
+    <table>
+            <tr>
+                <td>
+                    <asp:Label ID="LabelPatientID" runat="server" Text="Patient ID"></asp:Label>
+                </td>
+                <td colspan="2">
+                    <asp:TextBox ID="txtPatientID" runat="server" Width="300px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="LabelRoomNumber" runat="server" Text="Room Number"></asp:Label>
+                </td>
+                <td colspan="2">
+                    <asp:TextBox ID="txtRoomNumber" runat="server" Width="300px"></asp:TextBox>
+                </td>
+            </tr>
+        <tr>
+                <td>
+                    
+                </td>
+                <td colspan="2">
+                    <asp:Button ID="ButtonHospitalizePatient" runat="server" Text="Hospitalize Patient" OnClick="ButtonHospitalizePatient_Click"/>
+                </td>
+            </tr>
+            
+        </table>
+
     <h3> Hospitalized Patients </h3>
 
     <asp:GridView ID="hospitalizedPatients" runat="server" AutoGenerateColumns="false">
@@ -153,6 +183,7 @@
             <asp:BoundField DataField="Patient Full Name" HeaderText="Patient Name" />
             <asp:BoundField DataField="Patient's Kin Full Name" HeaderText="Kin Name" />
             <asp:BoundField DataField="Kin's Phone Number" HeaderText="Kin Phone" />
+            <asp:BoundField DataField="patientID" HeaderText="Patient ID" />
         </Columns>
     </asp:GridView>
 </asp:Content>

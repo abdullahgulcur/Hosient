@@ -240,6 +240,51 @@ namespace Hosient
         protected global::System.Web.UI.WebControls.Label lblErrorMessage;
 
         /// <summary>
+        /// LabelPatientID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPatientID;
+
+        /// <summary>
+        /// txtPatientID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPatientID;
+
+        /// <summary>
+        /// LabelRoomNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRoomNumber;
+
+        /// <summary>
+        /// txtRoomNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRoomNumber;
+
+        /// <summary>
+        /// ButtonHospitalizePatient control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonHospitalizePatient;
+
+        /// <summary>
         /// hospitalizedPatients control.
         /// </summary>
         /// <remarks>
