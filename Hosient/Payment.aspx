@@ -115,4 +115,15 @@
             </Columns>
         </asp:GridView>
 
+    <h2> Debt Of Patient </h2>
+
+    <asp:GridView ID="debtOfPatient" runat="server" AutoGenerateColumns="false">
+            <Columns>
+                <asp:BoundField DataField="fName" HeaderText="First Name" />
+                <asp:BoundField DataField="lName" HeaderText="Last Name" />
+                <asp:BoundField DataField="Debt" HeaderText="Debt" />
+                <asp:BoundField DataField="patientBillID" HeaderText="Patient Bill ID" />
+            </Columns>
+        </asp:GridView>
+
 </asp:Content>

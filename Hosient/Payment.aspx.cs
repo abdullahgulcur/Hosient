@@ -17,6 +17,7 @@ namespace Hosient
         {
             FillPaymentMethods();
             FillPaymentItems();
+            FillDebts();
         }
 
         protected void ButtonAddPaymentMethod_Click(object sender, EventArgs e)
@@ -33,6 +34,7 @@ namespace Hosient
             sqlCon.Close();
 
             FillPaymentMethods();
+            FillDebts();
         }
 
         protected void ButtonAddPaymentItem_Click(object sender, EventArgs e)
@@ -76,6 +78,19 @@ namespace Hosient
             sqlCon.Close();
             paymentItems.DataSource = table;
             paymentItems.DataBind();
+        }
+
+        void FillDebts()
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select * from DEBT_OF_PATIENT", sqlCon);
+            DataTable table = new DataTable();
+            sqlDataAdapter.Fill(table);
+            sqlCon.Close();
+            debtOfPatient.DataSource = table;
+            debtOfPatient.DataBind();
         }
     }
 }
