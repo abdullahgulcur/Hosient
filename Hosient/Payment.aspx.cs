@@ -15,10 +15,27 @@ namespace Hosient
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            FillPaymentMethods();
+            FillPaymentItems();
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected void ButtonAddPaymentMethod_Click(object sender, EventArgs e)
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand("INSERT_PAYMENT_METHOD", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@patientBillID", SqlDbType.BigInt).Value = txtPatientBillID1.Text.Trim();
+            sqlCmd.Parameters.AddWithValue("@paymentMethod", SqlDbType.NVarChar).Value = txtPaymentMethod.Text.Trim();
+            sqlCmd.Parameters.AddWithValue("@amount", SqlDbType.Decimal).Value = txtAmount.Text.Trim();
+
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+            FillPaymentMethods();
+        }
+
+        protected void ButtonAddPaymentItem_Click(object sender, EventArgs e)
         {
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
@@ -31,6 +48,34 @@ namespace Hosient
 
             sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
+
+            FillPaymentItems();
+        }
+
+        void FillPaymentMethods()
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select * from PAYMENT_METHOD", sqlCon);
+            DataTable table = new DataTable();
+            sqlDataAdapter.Fill(table);
+            sqlCon.Close();
+            paymentMethods.DataSource = table;
+            paymentMethods.DataBind();
+        }
+
+        void FillPaymentItems()
+        {
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select * from PAYMENT_ITEM", sqlCon);
+            DataTable table = new DataTable();
+            sqlDataAdapter.Fill(table);
+            sqlCon.Close();
+            paymentItems.DataSource = table;
+            paymentItems.DataBind();
         }
     }
 }
