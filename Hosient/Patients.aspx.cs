@@ -37,12 +37,13 @@ namespace Hosient
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
 
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select * from PATIENT_KIN_PHONE_NUMBER", sqlCon);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select p.patientID, pe.fName + ' ' + pe.lName fullName, b.title from PATIENT p inner join " +
+                "PERSON pe on p.patientID = pe.personID inner join BLOOD_TYPE b on b.bloodType = p.bloodType where pe.isDeleted = 0", sqlCon);
             DataTable table = new DataTable();
             sqlDataAdapter.Fill(table);
             sqlCon.Close();
-            patientWithKins.DataSource = table;
-            patientWithKins.DataBind();
+            patients.DataSource = table;
+            patients.DataBind();
         }
 
 
@@ -87,6 +88,25 @@ namespace Hosient
             sqlCon.Close();
 
             FillInmateWithDoctors();
+        }
+
+        protected void DeleteButtonClick(object sender, System.EventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            string personID = gvr.Cells[0].Text;
+
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+
+            SqlCommand sqlCmd = new SqlCommand("DELETE_PERSON", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@personID", SqlDbType.NVarChar).Value = personID;
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+            FillPatientWithKins();
         }
     }
 }

@@ -49,12 +49,33 @@ namespace Hosient
             if (sqlCon.State == ConnectionState.Closed)
                 sqlCon.Open();
 
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select * from DOCTOR_PHONE_ADDRESS", sqlCon);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select p.personID, dt.title, d.specialty, p.fName + ' '"
+                + "+ p.lName FullName from DOCTOR d inner join PERSON p on p.personID = d.doctorID inner join " +
+                "DOCTOR_TITLE dt on dt.doctorTitleID = d.title where p.isDeleted = 0", sqlCon);
             DataTable table = new DataTable();
             sqlDataAdapter.Fill(table);
             sqlCon.Close();
-            gvContact.DataSource = table;////////////
-            gvContact.DataBind();////////////////////
+            gvContact.DataSource = table;
+            gvContact.DataBind();
+        }
+
+        protected void DeleteButtonClick(object sender, System.EventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            string personID = gvr.Cells[0].Text;
+
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
+
+            SqlCommand sqlCmd = new SqlCommand("DELETE_PERSON", sqlCon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@personID", SqlDbType.NVarChar).Value = personID;
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+            FillGridView();
         }
 
     }

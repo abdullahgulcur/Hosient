@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Patients" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Patients.aspx.cs" Inherits="Hosient.Patients" %>
+﻿<%@ Page Title="Patients" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Patients.aspx.cs" Inherits="Hosient.Patients" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -176,14 +176,20 @@
         </Columns>
     </asp:GridView>
 
-     <h3> Patient With Kins </h3>
+     <h3> Patients </h3>
 
-    <asp:GridView ID="patientWithKins" runat="server" AutoGenerateColumns="false">
+    <asp:GridView ID="patients" runat="server" AutoGenerateColumns="false">
         <Columns>
-            <asp:BoundField DataField="Patient Full Name" HeaderText="Patient Name" />
-            <asp:BoundField DataField="Patient's Kin Full Name" HeaderText="Kin Name" />
-            <asp:BoundField DataField="Kin's Phone Number" HeaderText="Kin Phone" />
-            <asp:BoundField DataField="patientID" HeaderText="Patient ID" />
+            <asp:BoundField DataField="patientID" HeaderText="ID" />
+            <asp:BoundField DataField="fullName" HeaderText="Patient Name" />
+            <asp:BoundField DataField="title" HeaderText="Bood Type" />
+
+            <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="deleteButton" runat="server" Text="Delete" 
+                                    OnClick="DeleteButtonClick" />
+                    </ItemTemplate>
+                </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Content>

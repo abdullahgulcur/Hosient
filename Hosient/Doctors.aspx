@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Doctors" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Doctors.aspx.cs" Inherits="Hosient.Doctors" %>
+﻿<%@ Page Title="Doctors" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableEventValidation="false"  CodeBehind="Doctors.aspx.cs" Inherits="Hosient.Doctors" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -127,9 +127,20 @@
 
     <asp:GridView ID="gvContact" runat="server" AutoGenerateColumns="false">
             <Columns>
-                <asp:BoundField DataField="fullTitledName" HeaderText="Name" />
-                <asp:BoundField DataField="phoneNumber" HeaderText="Mobile" />
-                <asp:BoundField DataField="address" HeaderText="Address" />
+                <asp:BoundField DataField="personID" HeaderText="ID" />
+                <asp:BoundField DataField="title" HeaderText="Title" />
+                <asp:BoundField DataField="specialty" HeaderText="Specialty" />
+                <asp:BoundField DataField="FullName" HeaderText="Full Name" />
+
+             
+
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="deleteButton" runat="server" Text="Delete" 
+                                    OnClick="DeleteButtonClick" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
             </Columns>
         </asp:GridView>
 </asp:Content>
